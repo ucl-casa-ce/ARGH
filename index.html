@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>ARGH!!!!</title>
 
 <!--AFrame Library-->
 <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
@@ -19,19 +19,12 @@
           logarithmicDepthBuffer: true;
           physicallyCorrectLights: false;
           "
-
         arjs=
             'debugUIEnabled: false;
             sourceType: webcam;
-            
-
-
             trackingMethod: best;
-            patternRatio: 0.85;
+            patternRatio: 0.85
             '>
-
-            <!--           maxDetectionRate: 60;-->
-
              
             <assets>
                 <a-asset-item
@@ -46,35 +39,170 @@
                 </a-asset-item>
             </assets>
 
-                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-2.patt"  smooth="true" listener >
-                   
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-1.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
                 </a-marker>
 
-
-
-<!--Improve the stability on mobile-->
-                <a-entity id="target">
-                    <a-entity
-                    id="cloak" 
-                    gltf-model="#cloak_gltf"
-                    scale="8 8 8"
-                    position="0 0 0"
-                    rotation="0 0 0"
-                    cloak-gltf 
-                    >
-                </a-entity>
-
-                    <a-entity
-                        id="porthole"
-                        gltf-model="#porthole_gltf"
-                        scale="8 8 8"
-                        position="0 0 0"
-                        rotation="0 0 0"
-                        
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-3.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
                         >
-                  </a-entity>
-                    
-                </a-entity>
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-4.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-5.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-6.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-7.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-8.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-9.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-11.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+                <a-marker id="marker1" type="pattern" url="resources/pattern/pattern-12.patt" smooth="true" smoothCount="10" smoothTolerance="0.02" smoothThreshold="2" >                       
+                    <a-entity id="target">
+                        <a-entity
+                        id="cloak" gltf-model="#cloak_gltf"
+                        scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                        cloak-gltf 
+                        >
+                    </a-entity>
+                            <a-entity
+                            id="porthole" gltf-model="#porthole_gltf"
+                            scale="6 6 6" position="0 0 0" rotation="0 0 0"
+                            >
+                      </a-entity>
+                    </a-entity>
+                </a-marker>
+
+               
+
+
+                
             
             
             <a-entity camera></a-entity>
