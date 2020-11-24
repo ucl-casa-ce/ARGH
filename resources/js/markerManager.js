@@ -20,24 +20,26 @@ AFRAME.registerComponent('markers-start',{
 	
 	let sceneEl = document.querySelector('a-scene');
 	
-	for(let i=1; i<9; i++)
+	for(let i=1; i<8; i++)
 		{
+			console.log(i);
 			let markerPath="resources/pattern/pattern-"+i+".patt";
 			markersPathArray.push(markerPath);
 			markersNameArray.push('Marker_'+i);
 
-			let soundPath="resources/sounds/pirate.mp3"
+			let soundPath="resources/sounds/Argh.mp3"
 			soundPathArray.push(soundPath);
+			
 		}
 
-	for(let k=0; k<8; k++)
+	for(let k=0; k<7; k++)
 		{
 			let markerEl = document.createElement('a-marker');
 			markerEl.setAttribute('type','pattern');
 			markerEl.setAttribute('url',markersPathArray[k]);
 			markerEl.setAttribute('id',markersNameArray[k]);
 			markerEl.setAttribute('registerevents','');
-			markerEl.setAttribute('sound-sample',{src:'Pirate'});
+			markerEl.setAttribute('sound-sample',{src:'pattern'+(k+1)});
 			sceneEl.appendChild(markerEl);
 		}
 	}
@@ -56,7 +58,7 @@ AFRAME.registerComponent('registerevents', {
 
 			    sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
 				sound.play(marker.components['sound-sample'].data.src);
-
+console.log(marker.components['sound-sample'].data.src);
 				setTimeout(() => { console.log('Playing');}, 20);});
 
 			marker.addEventListener("markerLost",() =>{
@@ -72,10 +74,13 @@ AFRAME.registerComponent('registerevents', {
 	AFRAME.registerComponent("sound-sample-player",{
 		init:function() {
 		  sound = new Howl({
-		   src: ['resources/sounds/pirate.mp3'],
+		   src: ['resources/sounds/Argh.mp3'],
 		   sprite: {
 					 //key1: [offset, duration, (loop)]
-					 Pirate: [0,19383],
+					 pattern1: [0,87754],
+					 pattern2: [87754,151157],
+					 pattern3: [178912,150723],
+					 pattern5: [269635,55789]
 				   },
 				   
 			  onload: function() {
