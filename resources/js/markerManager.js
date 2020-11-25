@@ -5,6 +5,7 @@ let markerDict=new Object;
 let markersPathArray=[];
 let markersNameArray=[];
 let soundPathArray=[];
+let isThis=99;
 
 let sound; //the Howler sound
 let vector = new THREE.Vector3(); //target to getWorldDirection of the listener/camera //https://stackoverflow.com/questions/14813902/three-js-get-the-direction-in-which-the-camera-is-looking
@@ -20,46 +21,72 @@ AFRAME.registerComponent('markers-start',{
 	
 	let sceneEl = document.querySelector('a-scene');
 	
-	for(let i=1; i<8; i++)
+	for(let i=1; i<9; i++)
 		{
 			console.log(i);
 			let markerPath="resources/pattern/pattern-"+i+".patt";
 			markersPathArray.push(markerPath);
 			markersNameArray.push('Marker_'+i);
 
-			let soundPath="resources/sounds/Argh.mp3"
-			soundPathArray.push(soundPath);
+			//let soundPath="resources/sounds/Argh.mp3"
+			//soundPathArray.push(soundPath);
 			
 		}
 
-	for(let k=0; k<7; k++)
+	for(let k=0; k<8; k++)
 		{
 			let markerEl = document.createElement('a-marker');
 			markerEl.setAttribute('type','pattern');
 			markerEl.setAttribute('url',markersPathArray[k]);
 			markerEl.setAttribute('id',markersNameArray[k]);
+			
+			markerEl.setAttribute('smooth','true');
+			markerEl.setAttribute('smoothCount','10');
+			markerEl.setAttribute('smoothTolerance','0.05');
+			markerEl.setAttribute('smoothThreshold','10');
+
 			markerEl.setAttribute('registerevents','');
 			markerEl.setAttribute('sound-sample',{src:'pattern'+(k+1)});
+			markerEl.setAttribute('porthole-model','');
 			sceneEl.appendChild(markerEl);
+
 		}
 	}
 });
 
 //[on Marker] Events on markers found and lost
 AFRAME.registerComponent('registerevents', {
+	schema: {
+		soundid: {type: 'int', default:0},
+	  },
 		init: function () {
 			const marker = this.el;
-
+			
 			marker.addEventListener("markerFound", ()=> {
 				let markerId = marker.id;
 				console.log('markerFound', markerId);
-
-				marker.emit('IamReady',{value:markerId});
-
-			    sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
-				sound.play(marker.components['sound-sample'].data.src);
-console.log(marker.components['sound-sample'].data.src);
-				setTimeout(() => { console.log('Playing');}, 20);});
+				//marker.emit('IamReady',{value:markerId});
+				if(marker.id!==isThis)
+				{
+					console.log();
+					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
+									
+					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
+					this.data.soundid = sound.play(marker.components['sound-sample'].data.src);
+					console.log(this.data.soundid );
+					isThis=marker.id;
+		
+				}
+				else
+				{
+					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
+					console.log(isThis);
+					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
+					sound.play(this.data.soundid);
+					console.log(this.data.soundid );
+				}				
+			//	setTimeout(() => { console.log('Playing');}, 20);
+			});
 
 			marker.addEventListener("markerLost",() =>{
 				let markerId = marker.id;
@@ -74,7 +101,7 @@ console.log(marker.components['sound-sample'].data.src);
 	AFRAME.registerComponent("sound-sample-player",{
 		init:function() {
 		  sound = new Howl({
-		   src: ['resources/sounds/Argh.mp3'],
+		   src: ['resources/sounds/Argh_Low.mp3'],
 		   sprite: {
 					 //key1: [offset, duration, (loop)]
 					 pattern1: [0,87754],
@@ -111,6 +138,32 @@ AFRAME.registerComponent("sound-sample",{
    },
   });
 
+
+AFRAME.registerComponent("porthole-model",{
+	init:function(){
+		let cloak = document.createElement('a-entity');
+		let porthole = document.createElement('a-entity');
+
+		cloak.setAttribute('id','cloak');
+		porthole.setAttribute('id','porthole');
+
+		cloak.setAttribute('gltf-model','#cloak_gltf');
+		porthole.setAttribute('gltf-model','#porthole_gltf');
+		
+		cloak.object3D.scale.set(0.5, 0.5, 0.5);
+		porthole.object3D.scale.set(0.5, 0.5, 0.5);
+
+		cloak.setAttribute('cloak-gltf','')
+		porthole.setAttribute('porthole-image','')
+		
+		this.el.appendChild(cloak);
+		this.el.appendChild(porthole);
+
+	},
+  });
+
+
+  
 
 
   //[on Camera]. It is the listener of the sounds and update position and orientation every tick
