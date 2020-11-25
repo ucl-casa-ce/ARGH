@@ -1,11 +1,8 @@
-//Sound from https://freesound.org/people/Timbre/sounds/385882/
-
 //Global Variable
 let markerDict=new Object;
 let markersPathArray=[];
 let markersNameArray=[];
-let soundPathArray=[];
-let isThis=99;
+let isThis='';
 
 let sound; //the Howler sound
 let vector = new THREE.Vector3(); //target to getWorldDirection of the listener/camera //https://stackoverflow.com/questions/14813902/three-js-get-the-direction-in-which-the-camera-is-looking
@@ -23,14 +20,10 @@ AFRAME.registerComponent('markers-start',{
 	
 	for(let i=1; i<9; i++)
 		{
-			console.log(i);
+			//console.log(i);
 			let markerPath="resources/pattern/pattern-"+i+".patt";
 			markersPathArray.push(markerPath);
 			markersNameArray.push('Marker_'+i);
-
-			//let soundPath="resources/sounds/Argh.mp3"
-			//soundPathArray.push(soundPath);
-			
 		}
 
 	for(let k=0; k<8; k++)
@@ -47,6 +40,9 @@ AFRAME.registerComponent('markers-start',{
 
 			markerEl.setAttribute('registerevents','');
 			markerEl.setAttribute('sound-sample',{src:'pattern'+(k+1)});
+			markerEl.setAttribute('img-content',{src:'img'+(k+1)});
+			markerEl.setAttribute('text-porthole',{src:'text'+(k+1)});
+			
 			markerEl.setAttribute('porthole-model','');
 			sceneEl.appendChild(markerEl);
 
@@ -68,7 +64,6 @@ AFRAME.registerComponent('registerevents', {
 				//marker.emit('IamReady',{value:markerId});
 				if(marker.id!==isThis)
 				{
-					console.log();
 					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
 									
 					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
@@ -85,7 +80,6 @@ AFRAME.registerComponent('registerevents', {
 					sound.play(this.data.soundid);
 					console.log(this.data.soundid );
 				}				
-			//	setTimeout(() => { console.log('Playing');}, 20);
 			});
 
 			marker.addEventListener("markerLost",() =>{
@@ -101,17 +95,26 @@ AFRAME.registerComponent('registerevents', {
 	AFRAME.registerComponent("sound-sample-player",{
 		init:function() {
 		  sound = new Howl({
-		   src: ['resources/sounds/Argh_Low.mp3'],
+		   usingWebAudio: false, 
+		   mute: false,
+		   webAudio: false,
+		   html5: true,
+		   src: ['resources/sounds/Argh_cbr.mp3'],
 		   sprite: {
 					 //key1: [offset, duration, (loop)]
 					 pattern1: [0,87754],
-					 pattern2: [87754,151157],
-					 pattern3: [178912,150723],
-					 pattern5: [269635,55789]
+					 pattern2: [87754,91157],
+					 pattern3: [178912,90723],
+					 pattern4: [269635,185284],
+					 pattern5: [454920,55789],
+					 pattern6: [510709,242703],
+					 pattern7: [753413,319634],
+					 pattern8: [1073047,50285]
 				   },
 				   
 			  onload: function() {
 					   console.log("LOADED");
+					   document.querySelector("#loadingDiv").remove()
 					 },
 			   });
 			// Tweak the attributes to get the desired effect.
@@ -131,33 +134,55 @@ AFRAME.registerComponent('registerevents', {
 
 
 
-	//[on Entity - each sound] just a string with the ref of sound to play
+	//[on Entity - each marker] just a string with the ref of sound to play
 AFRAME.registerComponent("sound-sample",{
 	schema: {
 	 src: {type: 'string'},
    },
   });
 
+  //[on Entity - each marker] just a string with the ref of the image to show in the porthole
+AFRAME.registerComponent("img-content",{
+	schema: {
+	 src: {type: 'string'},
+   },
+  });
 
+//[on Entity - each marker] just a string with the ref of the 3D text to show in the porthole
+AFRAME.registerComponent("text-porthole",{
+	schema: {
+	 src: {type: 'string'},
+   },
+  });
+
+
+
+//[on Entity - each marker] porthole model and invisible cloak
 AFRAME.registerComponent("porthole-model",{
 	init:function(){
 		let cloak = document.createElement('a-entity');
 		let porthole = document.createElement('a-entity');
+		let text_porthole = document.createElement('a-entity');
 
 		cloak.setAttribute('id','cloak');
 		porthole.setAttribute('id','porthole');
+		text_porthole.setAttribute('id','porthole');
 
 		cloak.setAttribute('gltf-model','#cloak_gltf');
 		porthole.setAttribute('gltf-model','#porthole_gltf');
 		
+		text_porthole.setAttribute('gltf-model','#'+this.el.components['text-porthole'].data.src);
+
 		cloak.object3D.scale.set(0.5, 0.5, 0.5);
 		porthole.object3D.scale.set(0.5, 0.5, 0.5);
+		text_porthole.object3D.scale.set(0.5, 0.5, 0.5);
 
 		cloak.setAttribute('cloak-gltf','')
 		porthole.setAttribute('porthole-image','')
 		
 		this.el.appendChild(cloak);
 		this.el.appendChild(porthole);
+		this.el.appendChild(text_porthole);
 
 	},
   });
