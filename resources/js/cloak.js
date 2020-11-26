@@ -40,6 +40,8 @@ AFRAME.registerComponent('porthole-image', {
 				    {
               texture.center.set(.5, .5);
               texture.rotation =Math.PI ;
+              node.material.map = texture;
+              node.material.needsUpdate = true;
             }
             else{
               node.material.map = texture;

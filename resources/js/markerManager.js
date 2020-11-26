@@ -5,6 +5,7 @@ let markersNameArray=[];
 let isThis='';
 
 let sound; //the Howler sound
+let device; //check the device to provide best settings for iOS or Android
 let vector = new THREE.Vector3(); //target to getWorldDirection of the listener/camera //https://stackoverflow.com/questions/14813902/three-js-get-the-direction-in-which-the-camera-is-looking
 
 //
@@ -15,7 +16,7 @@ let vector = new THREE.Vector3(); //target to getWorldDirection of the listener/
 AFRAME.registerComponent('markers-start',{
 	init:function(){
 	console.log('Adding markers to the scene');
-	
+	device=navigator.platform;
 	let sceneEl = document.querySelector('a-scene');
 	
 	for(let i=1; i<9; i++)
@@ -68,11 +69,14 @@ AFRAME.registerComponent('registerevents', {
 				console.log('markerFound', markerId);
 				if(marker.id!==isThis)
 				{
+					let notiOS=true;
+					if (device==='iPad'||device==='iPhone'||device==='iPod'===true)
+				    {
+						notiOS=false;
+					}
 	  				sound = new Howl({
-							usingWebAudio: false, 
 							mute: false,
-							webAudio: false,
-							//html5: true,
+							html5: notiOS,
 							src: ['resources/sounds/'+marker.components['sound-sample'].data.src+'.webm','resources/sounds/'+marker.components['sound-sample'].data.src+'.mp3'],
 		
 					onload: function() {
