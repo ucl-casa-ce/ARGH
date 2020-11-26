@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>ARGH!!!!</title>
     
-    <link rel="stylesheet" href="resources\css\loading.css">
+<link rel="stylesheet" href="resources\css\loading.css">
     
 
 <!--Howler Sound plugin-->
@@ -19,41 +19,16 @@
 <script src="resources/js/markerManager.js"></script>
 </head>
 
-<style>
-    .arjs-loader {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .arjs-loader div {
-      text-align: center;
-      font-size: 1.25em;
-      color: white;
-    }
-  </style>
 
 <body style="margin : 0px; overflow: hidden;">
 
-    <!-- minimal loader shown until image descriptors are loaded -->
+    <!-- minimal loader shown until data is loaded -->
   <div id="loadingDiv" class="arjs-loader">
     <div>Loading, please wait...</div>
     <div class="lds-dual-ring"></div>
   </div>
 
-   <!--Instructions panel
-   <div id=instructionparent>
-    <div id=instruction >
-          <button class='button' onclick="closePanel();"> START! </button>
-    </div>
-  </div>-->
+  
 
     <a-scene
         embedded
@@ -76,6 +51,7 @@
                     src="resources/models/porthole.glb"
                     response-type="arraybuffer" >
                 </a-asset-item>
+
                 <a-asset-item
                     id="cloak_gltf"
                     src="resources/models/cloak.glb"
@@ -129,75 +105,16 @@
                 src="resources/models/texts/text8.glb"
                 response-type="arraybuffer" >
                 </a-asset-item>
-            
-            
-                
             </assets>
 
-            <!--src="resources/models/porthole2_Text.glb"
-            src="resources/models/porthole2_img.glb"-->
-<!--
-            <a-marker 
-                id="marker1" 
-                type="pattern" 
-                url="resources/pattern/pattern-1.patt" 
-                smooth="true" smoothCount="10" smoothTolerance="0.05" smoothThreshold="10"
-                registerevents 
-                sound-sample="src:pattern1"
-                >                       
-                <a-entity id="target">
-                    <a-entity
-                    id="cloak" gltf-model="#cloak_gltf"
-                    scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0"
-                    cloak-gltf
-                    >
-                    </a-entity>
-                                    
-                    <a-entity
-                    id="porthole" gltf-model="#porthole_gltf"
-                    scale="0.5 0.5 0.5" position="0 0 0" rotation="0 0 0"
-                    >
-                    </a-entity>
-                            </a-entity>
-                            
-                </a-marker>
-            -->
-            
-            <a-entity 
+        <!-- Very minimal HTML, all created via js-->    
+
+        <a-entity 
             camera
-            
             listener-howler
-            
-            ></a-entity>
-
-
-   
+            >
+        </a-entity>
 
     </a-scene>
-
-    
-     
-
-     <script>/*
-         
-         //Close the instruction panel
-function closePanel()
-{
-    var instruction = document.getElementById('instructionparent');
-    instruction.style.display = 'none';
-}
-
-p=navigator.platform;
-var instruction = document.getElementById('instructionparent');
- if(p==='iPad'||p==='iPhone'||p==='iPod'){
-        instruction.style.visibility='visible';
-    }
-else
-{
-    instruction.style.display = 'none';
-}        
-*/
-        </script>
-    
 </body>
 </html>
