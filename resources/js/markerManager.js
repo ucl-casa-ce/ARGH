@@ -79,7 +79,7 @@ AFRAME.registerComponent('registerevents', {
 	  				sound = new Howl({
 							mute: false,
 							html5: notiOS,
-							src: ['resources/sounds/'+marker.components['sound-sample'].data.src+'.webm','resources/sounds/'+marker.components['sound-sample'].data.src+'.mp3'],
+							src: ['resources/sounds/'+marker.components['sound-sample'].data.src+'.webm','resources/sounds/'+marker.components['sound-sample'].data.src+'.m4a','resources/sounds/'+marker.components['sound-sample'].data.src+'.mp3'],
 		
 					onload: function() {
 					console.log("LOADED");
