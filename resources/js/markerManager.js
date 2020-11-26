@@ -39,7 +39,8 @@ AFRAME.registerComponent('markers-start',{
 			markerEl.setAttribute('smoothThreshold','10');
 
 			markerEl.setAttribute('registerevents','');
-			markerEl.setAttribute('sound-sample',{src:'pattern'+(k+1)});
+			markerEl.setAttribute('sound-sample',{src:'sound'+(k+1)});
+
 			markerEl.setAttribute('img-content',{src:'img'+(k+1)});
 			markerEl.setAttribute('text-porthole',{src:'text'+(k+1)});
 			
@@ -47,6 +48,10 @@ AFRAME.registerComponent('markers-start',{
 			sceneEl.appendChild(markerEl);
 
 		}
+		setTimeout(() => {
+			document.querySelector("#loadingDiv").remove();
+		  }, 4000)
+		
 	}
 });
 
@@ -61,24 +66,44 @@ AFRAME.registerComponent('registerevents', {
 			marker.addEventListener("markerFound", ()=> {
 				let markerId = marker.id;
 				console.log('markerFound', markerId);
-				//marker.emit('IamReady',{value:markerId});
 				if(marker.id!==isThis)
 				{
-					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
-									
+	  				sound = new Howl({
+							usingWebAudio: false, 
+							mute: false,
+							webAudio: false,
+							//html5: true,
+							src: ['resources/sounds/'+marker.components['sound-sample'].data.src+'.webm','resources/sounds/'+marker.components['sound-sample'].data.src+'.mp3'],
+		
+					onload: function() {
+					console.log("LOADED");
+					if(document.querySelector("#loadingDiv")!==null){
+					document.querySelector("#loadingDiv").remove()}
+		 
+		  		},
+				});
+		 		// Tweak the attributes to get the desired effect.
+				sound.pannerAttr({
+					  coneInnerAngle: 360,
+					  coneOuterAngle: 360,
+					  coneOuterGain: 0,
+					  maxDistance: 10000,
+					  panningModel:'HRTF',
+					  refDistance: 1,
+					  rolloffFactor: 1,
+					  distanceModel: 'exponential',
+					});
+					sound.autoUnlock = true;
+
 					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
-					this.data.soundid = sound.play(marker.components['sound-sample'].data.src);
-					console.log(this.data.soundid );
+					this.data.soundid = sound.play();
 					isThis=marker.id;
 		
 				}
 				else
 				{
-					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
-					console.log(isThis);
 					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
 					sound.play(this.data.soundid);
-					console.log(this.data.soundid );
 				}				
 			});
 
@@ -91,9 +116,11 @@ AFRAME.registerComponent('registerevents', {
 		},
 	});
 
-//[on Camera] it is the player for the sound.
+
+//[on Camera] it is the player for the sound. Sprites
 	AFRAME.registerComponent("sound-sample-player",{
 		init:function() {
+			
 		  sound = new Howl({
 		   usingWebAudio: false, 
 		   mute: false,
@@ -102,19 +129,19 @@ AFRAME.registerComponent('registerevents', {
 		   src: ['resources/sounds/Argh_cbr.mp3'],
 		   sprite: {
 					 //key1: [offset, duration, (loop)]
-					 pattern1: [0,87754],
-					 pattern2: [87754,91157],
-					 pattern3: [178912,90723],
-					 pattern4: [269635,185284],
-					 pattern5: [454920,55789],
-					 pattern6: [510709,242703],
-					 pattern7: [753413,319634],
-					 pattern8: [1073047,50285]
+					 sound1: [0,87754],
+					 sound2: [87754,91157],
+					 sound3: [178912,90723],
+					 sound4: [269635,185284],
+					 sound5: [454920,55789],
+					 sound6: [510709,240703], //remove 2sec of duration
+					 sound7: [751413,319634], //add 2 sec to start
+					 sound8: [1072047,50285] //remove 1sec start time
 				   },
 				   
 			  onload: function() {
 					   console.log("LOADED");
-					   document.querySelector("#loadingDiv").remove()
+					   
 					 },
 			   });
 			// Tweak the attributes to get the desired effect.
@@ -128,7 +155,9 @@ AFRAME.registerComponent('registerevents', {
 						 rolloffFactor: 1,
 						 distanceModel: 'exponential',
 					   });
-	  },
+					   sound.autoUnlock = true;
+					   sound.html5PoolSize=100;
+					},
 	 });
 
 
@@ -206,3 +235,47 @@ AFRAME.registerComponent("listener-howler",{
 	 }
   });
 
+
+/*
+  //[on Marker] Events on markers found and lost
+AFRAME.registerComponent('registerevents', {
+	schema: {
+		soundid: {type: 'int', default:0},
+	  },
+		init: function () {
+			const marker = this.el;
+			
+			marker.addEventListener("markerFound", ()=> {
+				let markerId = marker.id;
+				console.log('markerFound', markerId);
+				//marker.emit('IamReady',{value:markerId});
+				if(marker.id!==isThis)
+				{
+					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
+					
+					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
+					this.data.soundid = sound.play();
+					isThis=marker.id;
+					console.log(this.data.soundid );
+					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
+					this.data.soundid = sound.play(marker.components['sound-sample'].data.src);
+					console.log(this.data.soundid );
+					isThis=marker.id;
+		
+				}
+				else
+				{
+					if(!sound._sprite.hasOwnProperty(marker.components['sound-sample'].data.src)){return;}
+					sound.pos(marker.object3D.position.x,marker.object3D.position.y,marker.object3D.position.z); //update the position for spatial sound
+					sound.play(this.data.soundid);
+				}				
+			});
+
+			marker.addEventListener("markerLost",() =>{
+				let markerId = marker.id;
+				console.log('markerLost', markerId);
+
+				sound.pause();
+			});
+		},
+	});*/

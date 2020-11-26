@@ -48,6 +48,12 @@
     <div class="lds-dual-ring"></div>
   </div>
 
+   <!--Instructions panel
+   <div id=instructionparent>
+    <div id=instruction >
+          <button class='button' onclick="closePanel();"> START! </button>
+    </div>
+  </div>-->
 
     <a-scene
         embedded
@@ -161,14 +167,37 @@
             camera
             
             listener-howler
-            sound-sample-player
+            
             ></a-entity>
 
 
+   
 
     </a-scene>
 
-   
+    
+     
+
+     <script>/*
+         
+         //Close the instruction panel
+function closePanel()
+{
+    var instruction = document.getElementById('instructionparent');
+    instruction.style.display = 'none';
+}
+
+p=navigator.platform;
+var instruction = document.getElementById('instructionparent');
+ if(p==='iPad'||p==='iPhone'||p==='iPod'){
+        instruction.style.visibility='visible';
+    }
+else
+{
+    instruction.style.display = 'none';
+}        
+*/
+        </script>
     
 </body>
 </html>
