@@ -1,120 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>ARGH!!!!</title>
-    
-<link rel="stylesheet" href="resources\css\loading.css">
-    
+    <title>ARgh!!!!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description"
+        content="ARGH! Mateys (Augmented Reality Grounded Heritage: Portholes for Environmental and Youth Stories) invites people to walk and discover new writing by young people hidden in digital portholes located throughout the Royal Docks.">
+
+    <link rel="stylesheet" type="text/css" href="resources/css/pure-drawer.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/loading.css" />
+
+</head>
 
 <!--Howler Sound plugin-->
 <script src="resources/js/howler.min.js"></script>
-
-<!--AFrame 1.0.4-->
-<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!--AFrame 1.2.0-->
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 <!--AR.Js Marker Based 3.1.0-->
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
 <script src="resources/js/cloak.js"></script>
 <script src="resources/js/markerManager.js"></script>
-</head>
+<!-- Matomo -->
+<script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://matomo.cetools.org/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '3']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
 
+</head>
 
 <body style="margin : 0px; overflow: hidden;">
 
-    <!-- minimal loader shown until data is loaded -->
-  <div id="loadingDiv" class="arjs-loader">
-    <div>Loading, please wait...</div>
-    <div class="lds-dual-ring"></div>
-  </div>
+    <div class="pure-container" data-effect="pure-effect-slide">
+        <input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left" />
 
-  
+        <label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left">
+            <span class="pure-toggle-icon"></span>
+        </label>
 
-    <a-scene
-        embedded
-        markers-start
-        vr-mode-ui="enabled: false;"
-        renderer="
+        <!-- minimal loader shown until data is loaded -->
+        <div id="loadingDiv" class="arjs-loader">
+            <div>Loading, please wait...</div>
+            <div class="lds-dual-ring"></div>
+        </div>
+
+
+        <nav class="pure-drawer" data-position="left">
+
+            <div class="container-content">
+
+                <p class="title-menu"> <span class="red-text">AR</span>GH! Mateys </p>
+                <p class="subtitle-menu">Augmented Reality Grounded Heritage: Portholes for Environmental and Youth
+                    Stories </p>
+                <p class="content-menu">
+                    Discover site-specific writing and spoken word poetry commissioned from local young people hidden in
+                    digital portholes located throughout the Royal Docks. Interactive web map is available at <a
+                        href="https://arghmateys.org/" target="_blank"> arghmateys.org </a>
+                    <br />
+                    <br />
+                    ARGH! Mateys has been created by researchers from the <a href="https://connected-environments.org/"
+                        target="_blank">Connected Environments Lab</a>
+                    together with young people from <a href="https://www.newham.gov.uk/children-families"
+                        target="_blank">Youth Empowerment</a>, <a href="https://fightforpeace.net/"
+                        target="_blank">Fight for Peace</a>, <a href="https://wsfroyaldocks.org/" target="_blank">West
+                        Silvertown Foundation</a> and <a href="https://www.rdlac.org/" target="_blank">Royal Docks
+                        Learning Activity Centre</a>.
+                    <br />
+                    <br />
+                    ARGH! Mateys was commissioned by the Royal Docks for Join the Docks Autumn Festival 2020
+                </p>
+            </div>
+
+
+
+        </nav>
+
+        <div class="pure-pusher-container">
+            <div class="pure-pusher">
+                <a-scene id="mainscene" embedded markers-start vr-mode-ui="enabled: false;" renderer="
           logarithmicDepthBuffer: true;
           physicallyCorrectLights: false;
-          "
-        arjs=
-           'debugUIEnabled: false;
+          " arjs='debugUIEnabled: false;
             sourceType: webcam;
             trackingMethod: best;
             patternRatio: 0.85
             '>
-             
-            <assets>
-                <a-asset-item
-                    id="porthole_gltf"
-                    src="resources/models/porthole.glb"
-                    response-type="arraybuffer" >
-                </a-asset-item>
 
-                <a-asset-item
-                    id="cloak_gltf"
-                    src="resources/models/cloak.glb"
-                    response-type="arraybuffer" >
-                </a-asset-item>
+                    <assets>
+                        <a-asset-item id="porthole_gltf" src="resources/models/porthole.glb"
+                            response-type="arraybuffer">
+                        </a-asset-item>
 
-                <a-asset-item
-                id="text1"
-                src="resources/models/texts/text1.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
+                        <a-asset-item id="cloak_gltf" src="resources/models/cloak.glb" response-type="arraybuffer">
+                        </a-asset-item>
 
-                <a-asset-item
-                id="text2"
-                src="resources/models/texts/text2.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            
-                <a-asset-item
-                id="text3"
-                src="resources/models/texts/text3.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            
-                <a-asset-item
-                id="text4"
-                src="resources/models/texts/text4.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            
-                <a-asset-item
-                id="text5"
-                src="resources/models/texts/text5.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            
-                <a-asset-item
-                id="text6"
-                src="resources/models/texts/text6.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            
-                <a-asset-item
-                id="text7"
-                src="resources/models/texts/text7.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            
-                <a-asset-item
-                id="text8"
-                src="resources/models/texts/text8.glb"
-                response-type="arraybuffer" >
-                </a-asset-item>
-            </assets>
+                        <a-asset-item id="text1" src="resources/models/texts/text1.glb" response-type="arraybuffer">
+                        </a-asset-item>
 
-        <!-- Very minimal HTML, all created via js-->    
+                        <a-asset-item id="text2" src="resources/models/texts/text2.glb" response-type="arraybuffer">
+                        </a-asset-item>
 
-        <a-entity 
-            camera
-            listener-howler
-            >
-        </a-entity>
+                        <a-asset-item id="text3" src="resources/models/texts/text3.glb" response-type="arraybuffer">
+                        </a-asset-item>
 
-    </a-scene>
+                        <a-asset-item id="text4" src="resources/models/texts/text4.glb" response-type="arraybuffer">
+                        </a-asset-item>
+
+                        <a-asset-item id="text5" src="resources/models/texts/text5.glb" response-type="arraybuffer">
+                        </a-asset-item>
+
+                        <a-asset-item id="text6" src="resources/models/texts/text6.glb" response-type="arraybuffer">
+                        </a-asset-item>
+
+                        <a-asset-item id="text7" src="resources/models/texts/text7.glb" response-type="arraybuffer">
+                        </a-asset-item>
+
+                        <a-asset-item id="text8" src="resources/models/texts/text8.glb" response-type="arraybuffer">
+                        </a-asset-item>
+                    </assets>
+
+                    <!-- Very minimal HTML, all created via js-->
+
+                    <a-entity camera listener-howler>
+                    </a-entity>
+
+                </a-scene>
+            </div>
+        </div>
+        <label class="pure-overlay" for="pure-toggle-left" data-overlay="left"></label>
+    </div>
+
+
 </body>
+
+<noscript><!-- Matomo Image Tracker-->
+    <img referrerpolicy="no-referrer-when-downgrade" src="https://matomo.cetools.org/matomo.php?idsite=3&amp;rec=1&amp;action_name=ARGH" style="border:0" alt="" />
+    <!-- End Matomo --></noscript>
+
 </html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ARGH!!!!</title>
+    
+<link rel="stylesheet" href="resources\css\loading.css">
+    
+
+<!--Howler Sound plugin-->
+<script src="resources/js/howler.min.js"></script>
+
+<!--AFrame 1.0.4-->
+<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!--AR.Js Marker Based 3.1.0-->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+<script src="resources/js/cloak.js"></script>
+<script src="resources/js/markerManager.js"></script>
+</head>
+
+
+<body style="margin : 0px; overflow: hidden;">
+
+    <!-- minimal loader shown until data is loaded -->
+  <div id="loadingDiv" class="arjs-loader">
+    <div>Loading, please wait...</div>
+    <div class="lds-dual-ring"></div>
+  </div>
+
+  
+
+    <a-scene
+        embedded
+        markers-start
+        vr-mode-ui="enabled: false;"
+        renderer="
+          logarithmicDepthBuffer: true;
+          physicallyCorrectLights: false;
+          "
+        arjs=
+           'debugUIEnabled: false;
+            sourceType: webcam;
+            trackingMethod: best;
+            patternRatio: 0.85
+            '>
+             
+            <assets>
+                <a-asset-item
+                    id="porthole_gltf"
+                    src="resources/models/porthole.glb"
+                    response-type="arraybuffer" >
+                </a-asset-item>
+
+                <a-asset-item
+                    id="cloak_gltf"
+                    src="resources/models/cloak.glb"
+                    response-type="arraybuffer" >
+                </a-asset-item>
+
+                <a-asset-item
+                id="text1"
+                src="resources/models/texts/text1.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+
+                <a-asset-item
+                id="text2"
+                src="resources/models/texts/text2.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            
+                <a-asset-item
+                id="text3"
+                src="resources/models/texts/text3.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            
+                <a-asset-item
+                id="text4"
+                src="resources/models/texts/text4.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            
+                <a-asset-item
+                id="text5"
+                src="resources/models/texts/text5.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            
+                <a-asset-item
+                id="text6"
+                src="resources/models/texts/text6.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            
+                <a-asset-item
+                id="text7"
+                src="resources/models/texts/text7.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            
+                <a-asset-item
+                id="text8"
+                src="resources/models/texts/text8.glb"
+                response-type="arraybuffer" >
+                </a-asset-item>
+            </assets>
+
+        <!-- Very minimal HTML, all created via js-->    
+
+        <a-entity 
+            camera
+            listener-howler
+            >
+        </a-entity>
+
+    </a-scene>
+</body>
+</html>
