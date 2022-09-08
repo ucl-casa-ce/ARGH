@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Inter:400,500,700);
 
 .arjs-loader {
   height: 100%;
@@ -45,4 +46,87 @@
       transform: rotate(360deg);
     }
   }
+
+  /*Menu Text*/
+
+  .container-content{
+    overflow: auto;
+    height: calc(100vh - 100px);
+    margin-top: 100px;
+  }
+  .title-menu{
+    margin: 0px 15px 0 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 48px;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .red-text{
+    color: red;
+  }
+  .white-text{
+    color: white;
+  }
+
+  .subtitle-menu::first-line{
+    
+    line-height: 30px;
+  }
+  .subtitle-menu{
+    margin: 0px 15px 0 15px;
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #FFFFFF;
+
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
   
+  .content-menu{
+    margin: 23px 15px 23px 15px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+
+    color: #FFFFFF;
+
+
+  }
+
+  /* unvisited link */
+a {
+  text-decoration: none;
+  color: #1FC08E;
+  font-weight: 700;
+}
+
+/*  link red */
+a:link {
+  color: #1FC08E;
+  font-weight: 700;
+}
+
+/* visited link green */
+a:visited {
+  color: #1FC08E;
+}
+
+/* mouse over link hotpink*/
+a:hover {
+  color: #1FC08E;
+}
+
+/* selected link blue */
+a:active {
+  color: #1FC08E;
+}
+
